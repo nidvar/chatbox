@@ -2,6 +2,14 @@
 let the_chats = [];
 let the_time = [];
 
+db.collection('chats').onSnapshot((entity)=>{
+	console.log(entity.docChanges().forEach((item)=>{
+		if(item.type === 'added'){
+			grab_data();
+		}
+	}));
+})
+
 const grab_data = ()=>{
 	db.collection('chats').get().then((entity)=>{
 		// 2. reloads the arrays to 0 so they don't double up.
@@ -46,7 +54,6 @@ document.getElementById('send').addEventListener('click', ()=>{
 		alert('enter username and message');
 	}else{
 		add_data();
-		grab_data();
 	}
 	document.getElementById('message').value = '';
 })
@@ -57,7 +64,6 @@ document.getElementById('message').addEventListener('keydown', (e)=>{
 			alert('enter username and message');
 		}else{
 			add_data();
-			grab_data();
 		}	
 		document.getElementById('message').value = null;
 		e.preventDefault();
