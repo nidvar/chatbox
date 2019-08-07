@@ -1,6 +1,5 @@
 // 1. create array for chats because the other array is weird
 let the_chats = [];
-let the_time = [];
 
 db.collection('chats').onSnapshot((entity)=>{
 	console.log(entity.docChanges().forEach((item)=>{
@@ -14,24 +13,21 @@ const grab_data = ()=>{
 	db.collection('chats').get().then((entity)=>{
 		// 2. reloads the arrays to 0 so they don't double up.
 		the_chats = [];
-		the_time = [];
 		entity.docs.forEach((item)=>{
 			the_chats.push(item.data())
-			the_time.push(item.data().time)
 		})
-		// 3. find largest number(latest time)
-		const x = the_time.sort((a,b)=>{return b-a})
-		const latest = x[0];
 
-		// 4. find array of the latest time
-		const y = the_chats.filter((item)=>{
-			if(item.time === x[0]){
-				return true
-			}
+		the_chats.sort((a, b) => (a.time > b.time) ? 1 : -1)
+
+		document.getElementById('root').innerHTML = '';
+
+		the_chats.forEach((item)=>{
+			const paragraph = document.createElement('p');
+			paragraph.textContent = `${item.username}:  ${item.message}`;
+			document.getElementById('root').appendChild(paragraph);			
 		})
-		const paragraph = document.createElement('p');
-		paragraph.textContent = `${y[0].username}:  ${y[0].message}`;
-		document.getElementById('root').appendChild(paragraph);
+
+
 
 	}).catch((error)=>{
 		console.log(error)
