@@ -1,0 +1,52 @@
+body{
+    height:100vh;
+    background-image:url('bg.jpg');
+    padding:20px;
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+}
+h1{
+    padding:20px 0 10px 0;
+    margin:0;
+}
+#mycontainer{
+	text-align:center;
+	width:800px;
+    margin:auto;
+    background-color:white;
+    border-radius:4px;
+    padding:20px;
+}
+.box{
+	margin:5px;
+	border-radius:10px;
+	padding:2px 15px 2px 15px;
+	display:block;
+}
+.box p{
+	margin:0;
+}
+#root{
+    text-align:left;
+    height:500px;
+    border:1px solid #dee2e6;
+    border-radius:4px;
+    margin:0 20px 0 20px;
+    overflow:scroll;
+    overflow-y: auto;
+}
+textarea{
+	display:block;
+	width:400px;
+	height:100px;
+	margin:auto;
+}
+.border{
+	border-radius:3px;
+	outline:none;
+}
+.myflexbox{
+	display:flex;
+	justify-content: space-between;
+}
