@@ -2,6 +2,8 @@ const div = document.getElementById('root');
 const user_input = document.getElementById('user_input');
 const form = document.getElementById('form');
 const new_user = `(${(Math.random()*100).toFixed(0)})`;
+const colors=['blue', 'red', 'orange', 'green', 'black'];
+const mycss= `color:${colors[Math.floor(Math.random()*4)]}`;
 
 let all_id=[];
 
@@ -9,7 +11,11 @@ let all_id=[];
 db.collection('items').onSnapshot((entity)=>{
     console.log(entity.docChanges().forEach((item)=>{
         if(item.type==='added'){
-            div.innerHTML+=`<p>${item.doc.data().user}: ${item.doc.data().title}</p>`
+            div.innerHTML+=`<div id='chat_div'>
+            <div id='flexdiv'><p style='${mycss}'>${item.doc.data().user}:</p><p>${new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()}</p></div>
+            <p id='the_text'> ${item.doc.data().title}</p>
+            </div>`
+            
             var element = document.getElementById('root');
             element.scrollTop = element.scrollHeight - element.clientHeight;
         }
