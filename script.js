@@ -37,20 +37,27 @@ const clear_log=()=>{
     div.innerHTML='';
 }
 
+const run_it=()=>{
+    const x = {
+        title:user_input.value,
+        time:new Date().getTime(),
+        user:`${new_user}-<b>${user_name.value}</b>`
+    }
+    add(x);
+    user_input.value='';
+}
+
 user_input.addEventListener('keydown', (e)=>{
     if(e.keyCode===13){
         e.preventDefault();
-        const x = {
-            title:user_input.value,
-            time:new Date().getTime(),
-            user:`${new_user}-<b>${user_name.value}</b>`
-        }
-        add(x);
-
-        user_input.value='';
+        run_it();
     }
 })
 
-clear.addEventListener('click', (e)=>{
+document.getElementById('mybutton').addEventListener('click', ()=>{
+    run_it();
+})
+
+clear.addEventListener('click', ()=>{
     clear_log();
 })
